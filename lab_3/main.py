@@ -3,7 +3,8 @@ from get_extra_info import *
 
 root = Tk()
 
-root.geometry('600x600')
+# create window for my program
+root.geometry('600x650')
 
 # save spinbox to have access to them from diff funcs
 spinbox_dict = {}
@@ -11,56 +12,98 @@ spinbox_dict = {}
 blocks = []
 # main matrix (array in array in array)
 matrix = []
+#
+main_best_row = []
+#
+main_best_col = [[], 0]
 
 
-def get_sum_of_row(row):
+# get sum of all elements of array
+def get_sum_of_array(row):
     sum = 0
     for el in row:
         sum += el
     return sum
 
 
-def show_best_column(data):
-    block = data[0]
-    col = data[1]
-    for row in block:
-        row[col]['fg'] = 'red'
+# render best row and best column (red color)
+def show_best_row_and_column(row, data):
+    global main_best_row
+    global main_best_col
 
+    for el in main_best_row:
+        el['fg'] = 'black'
 
-def show_best_row(row):
+    old_block = main_best_col[0]
+    old_col = main_best_col[1]
+    for y_row in old_block:
+        y_row[old_col]['fg'] = 'black'
+
     for el in row:
         el['fg'] = 'red'
 
+    new_block = data[0]
+    new_col = data[1]
+    for y_row in new_block:
+        y_row[new_col]['fg'] = 'red'
 
+    main_best_row = row
+    main_best_col = data
+
+
+# find best row and best column
 def get_result():
     best_row_value = 0
     best_row = matrix[0][0]
     best_column_value = 0
     best_column = [matrix[0], 0]
     for z in matrix:
-        for y in z:
+        for col in range(len(z[0])):
+            column = []
+            for row in range(len(z)):
+                column.append(int(z[row][col].get()))
+            col_sum = get_sum_of_array(column)
+            if col_sum > best_column_value:
+                best_column_value = col_sum
+                best_column = [z, col]
+        for y in range(len(z)):
             row = []
-            for x in y:
-                row.append(int(x.get()))
-            row_sum = get_sum_of_row(row)
+            for x in range(len(z[y])):
+                row.append(int(z[y][x].get()))
+            row_sum = get_sum_of_array(row)
             if row_sum > best_row_value:
                 best_row_value = row_sum
-                best_row = y
-    show_best_row(best_row)
-    show_best_column(best_column)
+                best_row = z[y]
+    show_best_row_and_column(best_row, best_column)
+    BEST_ROW['text'] = 'Найбільший рядок (сума) = ' + str(best_row_value)
+    BEST_COLUMN['text'] = 'Найбільша колонка (сума) = ' + str(best_column_value)
 
 
 #  button to get result
 GET_RESULT_BUTTON = Button(root, text='Результат', bg='black', activebackground='black',
                            fg='white', activeforeground='red', cursor='heart', command=get_result)
+#  frame for results
+RESULTS = Frame(root)
+# best row label
+BEST_ROW = Label(RESULTS, text='Найбільший рядок (сума) = ?', width=30)
+BEST_ROW.pack(side=LEFT)
+# best column label
+BEST_COLUMN = Label(RESULTS, text='Найбільша колонка (сума) = ?', width=30)
+BEST_COLUMN.pack(side=LEFT)
 
 
+# save input data (size of dimensions)
 def save_input_data():
     result = {'A': int(spinbox_dict['A'].get()), 'B': int(spinbox_dict['B'].get()), 'C': int(spinbox_dict['C'].get())}
+    global main_best_row
+    global main_best_col
+    main_best_row = []
+    main_best_col = [[], 0]
     render_matrix(result['A'], result['B'], result['C'])
     return result
 
 
+# render input fields for user`s data
 def create_input_fields():
     dimensions = ('A', 'B', 'C')
     input_frames = {}
@@ -75,6 +118,7 @@ def create_input_fields():
            fg='white', activeforeground='red', cursor='heart', command=save_input_data).pack(pady=10)
 
 
+#  create and render matrix (used in render_matrix())
 def create_matrix(a_dim, b_dim, c_dim):
     global matrix
     matrix = []
@@ -99,12 +143,17 @@ def create_matrix(a_dim, b_dim, c_dim):
     matrix = matrix
 
 
+# render matrix
 def render_matrix(a_dim, b_dim, c_dim):
+    BEST_ROW['text'] = 'Найбільший рядок (сума) = ?'
+    BEST_COLUMN['text'] = 'Найбільша колонка (сума) = ?'
+    RESULTS.pack_forget()
     GET_RESULT_BUTTON.pack_forget()
     for block in blocks:
         block.destroy()
     create_matrix(a_dim, b_dim, c_dim)
-    GET_RESULT_BUTTON.pack(pady=10)
+    RESULTS.pack(pady=10)
+    GET_RESULT_BUTTON.pack()
 
 
 create_input_fields()

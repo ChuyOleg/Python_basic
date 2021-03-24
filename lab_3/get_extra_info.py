@@ -1,3 +1,4 @@
+# get padding according to matrix
 def get_padding(number, current_num):
     if number == 4:
         if current_num == 0 or current_num == 3:
@@ -15,6 +16,7 @@ def get_padding(number, current_num):
         return 0
 
 
+# get side for position according to matrix
 def get_side(number, current_num):
     if number == 4:
         if current_num == 0 or current_num == 1:
