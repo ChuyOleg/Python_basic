@@ -1,6 +1,6 @@
 import sqlite3
 from sqlite3 import Error
-from mySQL import *
+
 
 def create_connection(path):
     connection = None
@@ -12,29 +12,43 @@ def create_connection(path):
     return connection
 
 
-# db = create_connection('server.db')
-# sql = db.cursor()
+def execute_query_sqlite(connection, query):
+    cursor = connection.cursor()
+    try:
+        result = cursor.execute(query)
+        connection.commit()
+        return result
+    except Error as e:
+        print(f"The error '{e}' occurred")
 
-# sql.execute("""CREATE TABLE IF NOT EXISTS users (
-#     login text,
-#     password text,
-#     cash int
-# )""")
-#
-# db.commit()
-#
-# require = input('"Do you want to add one more user? (yes | no) => ')
-#
-# while require == 'yes':
-#     user_login = input('Login: ')
-#     user_password = input('Password: ')
-#     if sql.fetchone() is None:
-#         sql.execute(f"INSERT INTO users VALUES (?, ?, ?)", (user_login, user_password, 0))
-#         db.commit()
-#         print('Registered.')
-#     else:
-#         print("This raw has already existed!")
-#     require = input('"Do you want to add one more user? (yes | no) => ')
-#
-# for value in sql.execute("SELECT * FROM users"):
-#     print(value)
+
+sqlLite_db = create_connection("server.db")
+
+create_table_query = """
+CREATE TABLE IF NOT EXISTS system(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    unit_location TEXT,
+    depart_location TEXT,
+    employee TEXT
+);
+"""
+
+fill_table_query = """
+INSERT INTO system(unit_location, depart_location, employee)
+VALUES
+    ('Kyiv', 'Svyatoshin', 'Rodgo Mark'),
+    ('Kyiv', 'Solomyanskiy', 'Smith Will'),
+    ('Kyiv', 'Obolon', 'Turner Elliot'),
+    ('Lviv', 'Phrankivskiy', 'Johnson Lisa'),
+    ('Lviv', 'Sihovskiy', 'Williams Henry'),
+    ('Lviv', 'Zaliznicnhiy', 'Garcia Patricia'),
+    ('Kharkiv', 'Industrialniy', 'Miller John'),
+    ('Kharkiv', 'Slobidskiy', 'Davis Susan'),
+    ('Kharkiv', 'Onsovyanskiy', 'Lopez Richard');
+"""
+
+# create table in sqlLite
+execute_query_sqlite(sqlLite_db, create_table_query)
+
+# fill table
+# execute_query_SQLite(sqlLite, fill_table_query)

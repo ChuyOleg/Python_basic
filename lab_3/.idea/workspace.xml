@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5f7e7dc-3eab-45bb-863b-9900ce34a015" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../lab_4/mySQL.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab_4/CRUD/common.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab_4/CRUD/create.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab_4/CRUD/delete.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab_4/CRUD/read.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab_4/CRUD/update.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab_4/extra_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab_4/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/lab_3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/lab_3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab_4/SQLite.py" beforeDir="false" afterPath="$PROJECT_DIR$/../lab_4/SQLite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab_4/mySQL.py" beforeDir="false" afterPath="$PROJECT_DIR$/../lab_4/mySQL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab_4/postgreSQL.py" beforeDir="false" afterPath="$PROJECT_DIR$/../lab_4/postgreSQL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab_4/server.db" beforeDir="false" afterPath="$PROJECT_DIR$/../lab_4/server.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +34,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lab_4" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -33,5 +46,17 @@
       <updated>1620207870554</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
