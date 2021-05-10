@@ -32,8 +32,8 @@ def execute_query_postgreSQL(connection, query):
     connection.autocommit = True
     cursor = connection.cursor()
     try:
-        cursor.execute(query)
-        print("Query executed successfully")
+        result = cursor.execute(query)
+        return result
     except OperationalError as e:
         print(f"The Error '{e}' occurred")
 
@@ -41,9 +41,9 @@ def execute_query_postgreSQL(connection, query):
 create_table_query = """
 CREATE TABLE IF NOT EXISTS my_table (    
     id SERIAL PRIMARY KEY,
-    unit_location TEXT,
+    unit_location int,
     depart_location TEXT,
-    employee TEXT
+    employee int
 )    
 """
 
